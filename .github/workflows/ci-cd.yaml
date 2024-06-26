@@ -1,0 +1,39 @@
+name: Terraform Deployment
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.KARTIK_BAWANE_ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.KARTIK_BAWANE_SECRET_KEY }}  
+
+jobs:
+  terraform:
+    name: 'Terraform Apply'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.0.0
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: terraform-files
+        
+      - name: Terraform Apply
+        run: terraform destroy -auto-approve
+        working-directory: terraform-files
+
+      - name: Store Instance IP 
+        run: echo $(terraform output instance_ip) > ./instance_ip.txt
+        working-directory: terraform-files
+
+      - name: Display Instance IP
+        run: cat terraform-files/instance_ip.txt
