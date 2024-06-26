@@ -29,7 +29,7 @@ jobs:
         
       - name: Terraform Apply
         run: terraform apply -auto-approve
-        working-directory: terraform-files
+        working-directory: terraform-files 
 
       - name: Store Instance IP 
         run: echo $(terraform output instance_ip) > ./instance_ip.txt
