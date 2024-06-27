@@ -11,7 +11,7 @@ env:
 
 jobs:
   terraform:
-    name: 'Terraform destroy'
+    name: 'Terraform apply'
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
         working-directory: terraform-files
         
       - name: Terraform destroy
-        run: terraform destroy -auto-approve
+        run: terraform apply -auto-approve
         working-directory: terraform-files 
 
       - name: Store Instance IP 
