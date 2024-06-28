@@ -27,8 +27,8 @@ jobs:
         run: terraform init
         working-directory: terraform-files
         
-      - name: Terraform destroy
-        run: terraform apply --auto-approve
+      - name: Terraform refresh
+        run: terraform refresh
         working-directory: terraform-files 
 
       - name: Store Instance IP 
