@@ -1,0 +1,7 @@
+title = "gitleaks config"
+description = ""
+rules = [
+  { description = "Generic API Key", regex = '''(?i)apikey['":= ][0-9a-zA-Z]{32,45}''', tags = ["apikey"] },
+  { description = "Generic Secret", regex = '''(?i)secret['":= ][0-9a-zA-Z]{32,45}''', tags = ["secret"] },
+]
+
